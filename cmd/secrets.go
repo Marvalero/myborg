@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/Marvalero/myborg/myborg/secret"
@@ -29,7 +28,10 @@ var decryptSecretsCmd = &cobra.Command{
 	Short: "decrypt secrets",
 	Long:  `decrypts secrets in your bucket`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("decrypt secrets called")
+		if len(args) < 1 {
+			log.Fatalln("Decrypt Secrets Usage: myborg secrets encrypt <name>")
+		}
+		secret.Decrypt(args[0])
 	},
 }
 
